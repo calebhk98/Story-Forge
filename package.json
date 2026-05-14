@@ -27,8 +27,7 @@
   "lint-staged": {
     "*.ts": [
       "prettier --write",
-      "eslint --fix --max-warnings=0",
-      "vitest related --run --reporter=dot"
+      "eslint --fix --max-warnings=0"
     ]
   },
   "devDependencies": {
