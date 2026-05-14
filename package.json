@@ -24,6 +24,13 @@
     "migrate:status": "tsx src/infrastructure/migrations/runner.ts status",
     "prepare": "husky"
   },
+  "lint-staged": {
+    "*.ts": [
+      "prettier --write",
+      "eslint --fix --max-warnings=0",
+      "vitest related --run --reporter=dot"
+    ]
+  },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^6.21.0",
     "@typescript-eslint/parser": "^6.21.0",
