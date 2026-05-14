@@ -171,7 +171,7 @@ export interface ILLMProvider {
   completeStructured<T>(
     prompt: Prompt,
     schema: JsonSchema<T>,
-    opts?: GenerationOptions
+    opts?: GenerationOptions,
   ): Promise<StructuredCompletion<T>>;
 
   /** Adapter identifier for logging and routing. */
@@ -191,11 +191,7 @@ Standard repository surface. CRUD with `ownerId` scoping. Migrations live in `in
  * Two implementations: binary (visibility tags) and llm-judged.
  */
 export interface IPerceptionFilter {
-  filter(
-    characterId: CharacterId,
-    scene: Scene,
-    events: Event[]
-  ): Promise<PerceivedEvent[]>;
+  filter(characterId: CharacterId, scene: Scene, events: Event[]): Promise<PerceivedEvent[]>;
 }
 ```
 
@@ -234,10 +230,10 @@ Settings are loaded once at startup into a typed `Config` object built and valid
 models:
   default:
     provider: openai-compatible
-    baseURL: http://localhost:11434/v1   # Ollama
-    apiKey: ""
+    baseURL: http://localhost:11434/v1 # Ollama
+    apiKey: ''
     model: llama-3.1-8b-instruct
-  critic:                                  # overrides default
+  critic: # overrides default
     provider: anthropic
     model: claude-sonnet-4-5
   narrator:
@@ -259,11 +255,13 @@ Every unit of work is a `Step` with a stable id like `run:abc.scene:7.draft`. St
 **Cache invalidation is explicit, never automatic.** Resumed runs always hit the cache. Operators or callers can trigger a fresh generation for a specific step via a `regenerateStep(stepId)` action exposed on the orchestrator. This invalidates the cache entry, reruns the step, and lets downstream steps see the new output on their next execution. Default behavior favors determinism; quality-fix regeneration is opt-in.
 
 **Failure handling**:
+
 - Transient errors (network, rate limit, timeout): retry with exponential backoff per the provider's policy
 - Persistent errors after max retries: step enters dead-letter state, run pauses, operator action required
 - Process crashes: on restart, the orchestrator finds the latest unfinished step and continues
 
 **Budgets** are enforced before each LLM call:
+
 - `maxTokens`: cumulative tokens this run
 - `maxCalls`: cumulative LLM calls this run
 - `maxWallClockSeconds`: real-time cap
@@ -292,6 +290,7 @@ Single-user local installs ignore most of this and only see the simple case.
 ## Logging
 
 Structured logs only. Every log line carries:
+
 - `runId` (when in a run context)
 - `stepId` (when in a step context)
 - `characterId` (when applicable)

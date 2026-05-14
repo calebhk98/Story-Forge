@@ -49,12 +49,12 @@ infrastructure  →  implements ports defined in  →  application  →  uses  �
 
 ### Layer responsibilities
 
-| Layer | Location | Contains |
-|---|---|---|
-| Domain | `src/domain/` | Entities, value objects, pure business logic. Zero deps. |
-| Application | `src/application/` | Use cases, port interfaces (`IXxx`), DTOs, `ApplicationError` subclasses |
-| Infrastructure | `src/infrastructure/` | Adapter implementations, factories, config loading, migrations |
-| Entry points | `src/main.ts`, `src/api/` | CLI entry and optional HTTP service |
+| Layer          | Location                  | Contains                                                                 |
+| -------------- | ------------------------- | ------------------------------------------------------------------------ |
+| Domain         | `src/domain/`             | Entities, value objects, pure business logic. Zero deps.                 |
+| Application    | `src/application/`        | Use cases, port interfaces (`IXxx`), DTOs, `ApplicationError` subclasses |
+| Infrastructure | `src/infrastructure/`     | Adapter implementations, factories, config loading, migrations           |
+| Entry points   | `src/main.ts`, `src/api/` | CLI entry and optional HTTP service                                      |
 
 ### Key ports (interfaces in `application/ports/`)
 
@@ -127,6 +127,7 @@ Key env vars: `DB_TYPE` (`sqlite`|`postgres`), `SQLITE_PATH`, `POSTGRES_URL`, `V
 ## Error handling
 
 Three error categories with typed codes — never string-match error messages:
+
 - `DomainError` (`domain/errors/`): business-rule violations, no stack traces in logs.
 - `ApplicationError` (`application/errors/`): use-case preconditions, logged with context.
 - Infrastructure errors: caught at use-case boundaries, wrapped in `ApplicationError`.

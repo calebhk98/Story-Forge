@@ -74,6 +74,7 @@ If you skip these and submit a PR, the review will mostly consist of references 
 ## Pull request expectations
 
 A good PR:
+
 - Targets one phase or one issue
 - Has a clear title following commit conventions (`feat: ...`, `fix: ...`)
 - Describes what changed and why, with any context a reviewer needs
@@ -87,6 +88,7 @@ Keep PRs small. A 5-file, 200-line PR gets a thoughtful review. A 40-file, 2000-
 ## Code review
 
 As a reviewer, ask:
+
 - Does this match `ARCHITECTURE.md`? (No infrastructure imports from domain or application?)
 - Are the tests meaningful? Do they actually exercise behavior, not just construct objects?
 - Are names good? Would a stranger understand?
@@ -95,6 +97,7 @@ As a reviewer, ask:
 - Are errors handled at the right boundary?
 
 As an author, expect:
+
 - Questions, even on parts you thought were obvious
 - Requests to split a PR if it grew larger than intended
 - Requests for more tests if the test surface is thin
@@ -127,6 +130,7 @@ This is the most common contribution. Steps:
 ## Asking questions
 
 Open an issue with the `question` label or use whatever discussion channel the project has set up. Include:
+
 - What you're trying to do
 - What you tried
 - What surprised you

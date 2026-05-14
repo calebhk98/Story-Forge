@@ -20,6 +20,7 @@ Commits with `test:` as their type can have failing tests. They will fail CI whe
 **Pull requests must be all green before merge.** The PR represents the unit of work as a whole, and all tests must pass at the merge point. The intermediate red commits stay in the branch history (use squash-merge only if you don't care about the history; merge-commit or rebase-merge preserves it).
 
 CI configuration:
+
 - CI runs on `pull_request` events against the merge result, not individual branch commits.
 - Optionally, CI also runs on `push` to feature branches, in which case red intermediate commits will show red. That's fine.
 - CI must be green on the PR head before merge is allowed (branch protection rule).
@@ -28,16 +29,16 @@ CI configuration:
 
 [Conventional Commits](https://www.conventionalcommits.org/) style:
 
-| Prefix | Use |
-|---|---|
-| `test:` | Adding or modifying tests, especially the red commits |
-| `feat:` | A new feature, the green commit that makes tests pass |
-| `fix:` | A bug fix |
-| `refactor:` | Code change that neither fixes a bug nor adds a feature |
-| `docs:` | Documentation only |
-| `chore:` | Build, tooling, dependencies |
-| `perf:` | Performance improvement |
-| `style:` | Formatting, missing semicolons, etc. (rare with prettier) |
+| Prefix      | Use                                                       |
+| ----------- | --------------------------------------------------------- |
+| `test:`     | Adding or modifying tests, especially the red commits     |
+| `feat:`     | A new feature, the green commit that makes tests pass     |
+| `fix:`      | A bug fix                                                 |
+| `refactor:` | Code change that neither fixes a bug nor adds a feature   |
+| `docs:`     | Documentation only                                        |
+| `chore:`    | Build, tooling, dependencies                              |
+| `perf:`     | Performance improvement                                   |
+| `style:`    | Formatting, missing semicolons, etc. (rare with prettier) |
 
 Examples:
 
@@ -62,6 +63,7 @@ Example: `GenerateOutline` is tested with a `MockLLMProvider` that returns a scr
 Test one or two adapters working together against real external dependencies, or test a use case against real adapters. Live in `tests/integration/`. Slower (seconds per test). Gated behind env flags in CI for things that need credentials or external services.
 
 Examples:
+
 - `PostgresStoryRepository` against a real Postgres in a service container
 - `OpenAICompatibleLLMProvider` against a local Ollama (if `OLLAMA_URL` is set), skipped otherwise
 
@@ -108,21 +110,23 @@ describe('GenerateOutline', () => {
 Use sparingly. Snapshots are great for catching unintended changes in stable output. They are terrible for catching regressions in evolving output.
 
 Acceptable:
+
 - The structure of a `Prompt` object built by a use case
 - The shape of an error response
 
 Unacceptable:
+
 - Full LLM responses (they vary by model, by version, by sampling)
 - Generated prose (varies wildly)
 
 ## Coverage targets
 
-| Layer | Target line coverage |
-|---|---|
-| `domain/` | 95%+ |
-| `application/` | 85%+ |
+| Layer                      | Target line coverage                        |
+| -------------------------- | ------------------------------------------- |
+| `domain/`                  | 95%+                                        |
+| `application/`             | 85%+                                        |
 | `infrastructure/adapters/` | 70%+ (some adapters need integration tests) |
-| Overall | 80%+ |
+| Overall                    | 80%+                                        |
 
 Coverage is reported in CI. PRs that lower coverage are flagged but not blocked automatically (reviewer judgment).
 
@@ -150,6 +154,7 @@ Builders are simpler than they look and dramatically reduce test fragility when 
 ## Pre-commit
 
 `husky` runs `lint-staged` which:
+
 - Formats with Prettier
 - Lints with ESLint (auto-fix where possible)
 - Runs the test command on changed test files only (`vitest related <files>`)

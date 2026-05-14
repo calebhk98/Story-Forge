@@ -11,6 +11,7 @@ Phases are sequential. Skipping ahead is allowed in personal exploration but the
 **Goal**: A repository that compiles, lints, tests, and runs an empty `main` without errors.
 
 **Deliverables**:
+
 - `package.json` with TypeScript 5+, Vitest, ESLint, Prettier, Husky, lint-staged
 - `tsconfig.json` with `"strict": true`, `"noUncheckedIndexedAccess": true`
 - `.eslintrc.cjs` enforcing the rules in `CODE_STYLE.md` (max-depth 4, max-lines 500, JSDoc requirements)
@@ -30,6 +31,7 @@ Phases are sequential. Skipping ahead is allowed in personal exploration but the
 **Goal**: Plain-object representations of the core story concepts, with no dependencies on infrastructure.
 
 **Deliverables**:
+
 - `domain/entities/`: `Story`, `Character`, `Scene`, `Outline`, `Event`
 - `domain/value-objects/`: `POVConfig`, `NarratorVoice`, `PlotMode`, `PerceptionMode`, `Visibility`
 - Each entity has a constructor that validates its inputs
@@ -46,6 +48,7 @@ Phases are sequential. Skipping ahead is allowed in personal exploration but the
 **Goal**: A typed `Config` object and structured logging available throughout the app.
 
 **Deliverables**:
+
 - `infrastructure/config/Config.ts`: zod schema for all settings
 - `infrastructure/config/ConfigLoader.ts`: reads `.env`, validates, returns `Config`
 - `.env.example` updated to match the schema
@@ -63,6 +66,7 @@ Phases are sequential. Skipping ahead is allowed in personal exploration but the
 **Goal**: Generate a completion from a real provider.
 
 **Deliverables**:
+
 - `application/ports/ILLMProvider.ts` with `complete` and `completeStructured`
 - `domain/value-objects/Prompt.ts`, `Completion.ts`
 - `infrastructure/adapters/llm/OpenAICompatibleLLMProvider.ts` (start here, covers the most providers)
@@ -81,6 +85,7 @@ Phases are sequential. Skipping ahead is allowed in personal exploration but the
 **Goal**: Repositories for stories and characters, working against both Postgres and SQLite.
 
 **Deliverables**:
+
 - `application/ports/IStoryRepository.ts`, `ICharacterRepository.ts`
 - `infrastructure/adapters/db/sqlite/SqliteStoryRepository.ts` and character counterpart
 - `infrastructure/adapters/db/postgres/PostgresStoryRepository.ts` and character counterpart
@@ -100,6 +105,7 @@ Phases are sequential. Skipping ahead is allowed in personal exploration but the
 **Goal**: Given a story prompt and configuration, produce an outline.
 
 **Deliverables**:
+
 - `application/use-cases/GenerateOutline.ts`
 - Failing tests committed first (red commit): unit tests with mocked LLM, asserting on prompt structure and parsing
 - Implementation that passes the tests (green commit)
@@ -115,6 +121,7 @@ Phases are sequential. Skipping ahead is allowed in personal exploration but the
 **Goal**: Given an outline, generate character cards for every named character.
 
 **Deliverables**:
+
 - `application/use-cases/GenerateCharacterProfile.ts`
 - Failing tests then implementation
 - CLI command: `generate-profiles <storyId>`
@@ -128,6 +135,7 @@ Phases are sequential. Skipping ahead is allowed in personal exploration but the
 **Goal**: Event log, world state, and perception filtering.
 
 **Deliverables**:
+
 - `application/ports/IEventLog.ts` with append-only semantics
 - DB adapters for the event log (both dialects)
 - `application/ports/IPerceptionFilter.ts`
@@ -145,6 +153,7 @@ Phases are sequential. Skipping ahead is allowed in personal exploration but the
 **Goal**: A single character LLM call that produces structured output from a belief state.
 
 **Deliverables**:
+
 - `application/use-cases/RunCharacterAgent.ts`
 - Strict JSON schema for the output: `{ thoughts, dialogue, actions[] }`
 - Robust parsing with `jsonrepair` fallback for providers without structured output
@@ -163,6 +172,7 @@ Phases are sequential. Skipping ahead is allowed in personal exploration but the
 **Goal**: Translate outline beats into canonical world events for a scene.
 
 **Deliverables**:
+
 - `application/use-cases/PlanScene.ts` (director functionality)
 - `IDirector` port
 - A simple LLM-driven director adapter that takes the beat plus prior state and emits an event sequence
@@ -178,6 +188,7 @@ Phases are sequential. Skipping ahead is allowed in personal exploration but the
 **Goal**: Turn structured scene output and events into prose.
 
 **Deliverables**:
+
 - `application/use-cases/GenerateNarration.ts`
 - `INarrator` port with one adapter using `ILLMProvider`
 - Narrator voice templates for each voice option
@@ -193,6 +204,7 @@ Phases are sequential. Skipping ahead is allowed in personal exploration but the
 **Goal**: Run a single scene from beat to committed prose with all the pieces wired up.
 
 **Deliverables**:
+
 - `application/use-cases/RunScene.ts` orchestrating: director, perception, character agents, director resolution, narrator
 - CLI command: `run-scene <storyId> <beatId>`
 - Persists events and prose
@@ -207,6 +219,7 @@ Phases are sequential. Skipping ahead is allowed in personal exploration but the
 **Goal**: Detect and fix POV violations, continuity errors, and outline drift.
 
 **Deliverables**:
+
 - `application/use-cases/ReviewScene.ts`
 - `application/use-cases/ReviseScene.ts`
 - Critic output schema with severity (`block`, `warn`, `note`)
@@ -222,6 +235,7 @@ Phases are sequential. Skipping ahead is allowed in personal exploration but the
 **Goal**: Long-running, resumable, budgeted runs.
 
 **Deliverables**:
+
 - `domain/entities/GenerationRun.ts` with state machine
 - `application/ports/IJobStore.ts`
 - DB adapters for job store (both dialects), including idempotency cache
@@ -239,6 +253,7 @@ Phases are sequential. Skipping ahead is allowed in personal exploration but the
 **Goal**: DB-backed runtime settings replacing reload-from-env.
 
 **Deliverables**:
+
 - `application/ports/ISettingsStore.ts`
 - `infrastructure/adapters/settings/DbSettingsStore.ts`
 - Migration adds `settings` table
@@ -256,6 +271,7 @@ Phases are sequential. Skipping ahead is allowed in personal exploration but the
 **Goal**: Promote a background entity to a named character with backfilled memory.
 
 **Deliverables**:
+
 - `application/use-cases/GenerateCharacterCard.ts` (works on existing story context)
 - `application/use-cases/BackfillCharacterMemory.ts`
 - CLI command: `promote-character <storyId> <entityDescription>`
@@ -270,6 +286,7 @@ Phases are sequential. Skipping ahead is allowed in personal exploration but the
 **Goal**: HTTP surface for a consumer to build a website on.
 
 **Deliverables**:
+
 - `src/api/server.ts` (Express or Fastify)
 - Routes for: create story, list stories, get story, start run, get run status, pause run, resume run, get settings, update settings
 - All routes scope by `ownerId` from a header (consumer plugs in auth)
