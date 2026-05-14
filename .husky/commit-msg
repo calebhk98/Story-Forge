@@ -8,11 +8,19 @@ if [ -z "$STAGED_TS" ]; then
   exit 0
 fi
 
+VITEST_OUT=$(mktemp)
 # shellcheck disable=SC2086
-if [ "$PREFIX" = "test" ]; then
-  # test: commits are intentionally red — show results but never block
-  npx vitest related $STAGED_TS --run --reporter=dot || true
-else
-  # All other prefixes must have passing tests
-  npx vitest related $STAGED_TS --run --reporter=dot
+npx vitest related $STAGED_TS --run --reporter=verbose >"$VITEST_OUT" 2>&1
+VITEST_CODE=$?
+
+if [ $VITEST_CODE -ne 0 ]; then
+  # Print only from the "Failed Tests" separator onwards — no passing test noise
+  awk '/⎯+ Failed Tests/,0' "$VITEST_OUT"
 fi
+
+rm -f "$VITEST_OUT"
+
+# test: commits are intentionally red — show failures above but always let through
+[ "$PREFIX" = "test" ] && exit 0
+
+exit $VITEST_CODE
