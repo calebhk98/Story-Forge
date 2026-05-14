@@ -1,0 +1,29 @@
+{
+  "name": "story-forge",
+  "version": "0.1.0",
+  "description": "AI-driven story generation with per-character belief states",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "start": "node dist/main.js",
+    "cli": "tsx src/main.ts",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint src tests --ext .ts",
+    "lint:fix": "eslint src tests --ext .ts --fix",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "test": "vitest run",
+    "test:unit": "vitest run tests/unit",
+    "test:integration": "vitest run tests/integration",
+    "test:e2e": "vitest run tests/e2e",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "migrate": "tsx src/infrastructure/migrations/runner.ts",
+    "migrate:rollback": "tsx src/infrastructure/migrations/runner.ts rollback",
+    "migrate:status": "tsx src/infrastructure/migrations/runner.ts status",
+    "prepare": "husky"
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}
