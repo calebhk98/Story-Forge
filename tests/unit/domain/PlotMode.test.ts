@@ -14,4 +14,8 @@ describe('isPlotMode', () => {
   it('rejects invalid values', () => {
     expect(isPlotMode('random')).toBe(false);
   });
+
+  it('intentionally failing — red commit', () => {
+    expect(isPlotMode('invalid')).toBe(true);
+  });
 });
