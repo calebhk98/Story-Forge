@@ -22,17 +22,17 @@ Early development. The repository currently contains design documentation only. 
 
 Read these in roughly the listed order.
 
-| Document | Purpose |
-|---|---|
-| `README.md` | This file |
-| `GLOSSARY.md` | Terms used throughout the docs and code |
-| `DOMAIN_MODEL.md` | The story-generation mechanics, conceptual model |
+| Document          | Purpose                                           |
+| ----------------- | ------------------------------------------------- |
+| `README.md`       | This file                                         |
+| `GLOSSARY.md`     | Terms used throughout the docs and code           |
+| `DOMAIN_MODEL.md` | The story-generation mechanics, conceptual model  |
 | `ARCHITECTURE.md` | Software architecture, layers, ports and adapters |
-| `ROADMAP.md` | Phased implementation plan |
-| `CODE_STYLE.md` | Coding standards and quality rules |
-| `TESTING.md` | TDD workflow and commit conventions |
-| `CONTRIBUTING.md` | Dev setup, PR process, where to ask |
-| `LICENSE` | MIT |
+| `ROADMAP.md`      | Phased implementation plan                        |
+| `CODE_STYLE.md`   | Coding standards and quality rules                |
+| `TESTING.md`      | TDD workflow and commit conventions               |
+| `CONTRIBUTING.md` | Dev setup, PR process, where to ask               |
+| `LICENSE`         | MIT                                               |
 
 ## Planned capabilities
 

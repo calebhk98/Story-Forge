@@ -234,7 +234,7 @@ Configure path aliases in `tsconfig.json` (`@/*` -> `src/*`) so absolute interna
 
 ## Comments
 
-Prefer self-documenting code. A comment that restates the code is noise. A comment that explains *why* is gold.
+Prefer self-documenting code. A comment that restates the code is noise. A comment that explains _why_ is gold.
 
 Bad:
 

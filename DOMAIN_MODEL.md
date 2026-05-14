@@ -31,6 +31,7 @@ Background entities without character cards are handled by the narrator and have
 ### Scene
 
 A unit of generation. Carries:
+
 - Setting (location, time)
 - Present characters (ids)
 - POV configuration (single character or multi)
@@ -43,6 +44,7 @@ A unit of generation. Carries:
 ### Event
 
 A single thing that happened. Recorded with:
+
 - `id`, `sceneId`, `time` (ordinal within scene)
 - `actor` (character id or `narrator` for environmental)
 - `action` (structured, for example `Move`, `Speak`, `PerformAction`, `EnvironmentalChange`)
@@ -76,6 +78,7 @@ The character agent's prompt is constructed from this belief state. It never see
 ### Narrator view
 
 The narrator receives:
+
 - The full event log for the current scene
 - The world state at scene start
 - The POV character's belief state (for limited modes)
@@ -165,6 +168,7 @@ The critic checks each generated scene against:
 5. **Information leakage**: did any character act on knowledge they could not have?
 
 Critiques carry a severity:
+
 - `block`: regeneration required
 - `warn`: noted but does not block
 - `note`: informational only
