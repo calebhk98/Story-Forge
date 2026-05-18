@@ -37,9 +37,9 @@
     "eslint": "^8.57.1",
     "eslint-plugin-jsdoc": "^62.9.0",
     "husky": "^9.1.7",
-    "lint-staged": "^17.0.4",
+    "lint-staged": "^17.0.5",
     "prettier": "^3.8.3",
-    "tsx": "^4.21.0",
+    "tsx": "^4.22.1",
     "typescript": "^5.9.3",
     "vitest": "^2.1.9"
   }
